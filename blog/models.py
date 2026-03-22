@@ -8,12 +8,26 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     date_updated = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
 
-class Meta:
-    verbose_name = 'Пользователь'
-    verbose_name_plural = 'Пользователи'
 
-def __str__(self):
-    return self.username
+    groups = models.ManyToManyField(
+    'auth.Group',
+        related_name='blog_user_groups',
+        blank=True,
+        verbose_name='Groups'
+    )
+    user_permissions = models.ManyToManyField(
+    'auth.Permission',
+    related_name='blog_user_permissions',
+    blank=True,
+    verbose_name='User permissions'
+    )
+
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+
+    def __str__(self):
+        return self.username
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
