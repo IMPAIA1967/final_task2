@@ -34,7 +34,7 @@ def validate_author_age(value):
 
 # Валидатор запрещённых слов
 def validate_forbidden_words(value):
-    forbidden_words = ['кринж', 'хайп', 'токсик']
+    forbidden_words = ['ерунда', 'глупость', 'чепуха']
     for word in forbidden_words:
         if word in value.lower():
             raise ValidationError(f'Заголовок содержит запрещённое слово: {word}')
