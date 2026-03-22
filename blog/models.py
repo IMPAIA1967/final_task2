@@ -8,18 +8,17 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     date_updated = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
 
-
     groups = models.ManyToManyField(
-    'auth.Group',
+        'auth.Group',
         related_name='blog_user_groups',
         blank=True,
         verbose_name='Groups'
     )
     user_permissions = models.ManyToManyField(
-    'auth.Permission',
-    related_name='blog_user_permissions',
-    blank=True,
-    verbose_name='User permissions'
+        'auth.Permission',
+        related_name='blog_user_permissions',
+        blank=True,
+        verbose_name='User permissions'
     )
 
     class Meta:
@@ -28,6 +27,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
@@ -44,6 +44,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name='Автор')
